@@ -11,7 +11,7 @@ vlan1=2010
 vlan2=2011
 vlan3=2012
 
-cp /etc/network/interfaces ./temp_interfaces.txt
+cp interfaces ./temp_interfaces.txt
 
 if1="eth0.${vlan1}"
 if2="eth0.${vlan2}"

@@ -6,8 +6,10 @@ MF_SRC=/root/mobilityfirst
 click_config=$MF_SRC/router/click/conf/MF_IPAccessMultiRouter.click
 router_GUID=1
 #topology_file=$MF_SRC/eval/topology/testcfg_1-gstar_3node.tp
-topology_file=/root/conf/topology/testcfg_5-gstar_4node_groupguid.tp
+#topology_file=/root/conf/topology/testcfg_5-gstar_4node_groupguid.tp
 #topology_file=/root/chk-mngr-svn/eval/topology/testcfg_4-gstar_8node_multihome.tp
+
+topology_file=/root/scripts/conf/topology/transport_mobility_9nodes.tp
 core_dev_interface=eth0.1002
 edge_dev_interface=eth0.1001
 edge_dev_interface_ip=192.168.1.2

@@ -48,3 +48,7 @@ if [ $node_id -ge 2 -a $node_id -le 4 ]; then
 fi
 
 cp temp_interfaces.txt /etc/network/interfaces
+
+if [ $node_id -eq 3 ]; then
+  cp ../net-ipv4.xml /root/conf/gnrs/
+fi

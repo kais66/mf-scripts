@@ -52,3 +52,5 @@ cp temp_interfaces.txt /etc/network/interfaces
 if [ $node_id -eq 3 ]; then
   cp ../net-ipv4.xml /root/conf/gnrs/
 fi
+
+modprobe 8021q

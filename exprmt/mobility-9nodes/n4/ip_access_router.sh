@@ -6,7 +6,7 @@ MF_SRC=/root/mobilityfirst
 click_config=$MF_SRC/router/click/conf/MF_IPAccessMultiRouter.click
 #click_config=$MF_SRC/router/click/conf/MF_StgAccessMultiRouter.click
 
-router_GUID=3
+router_GUID=4
 #topology_file=$MF_SRC/eval/topology/testcfg_1-gstar_3node.tp
 #topology_file=/root/conf/topology/testcfg_5-gstar_4node_groupguid.tp
 topology_file=/root/scripts/conf/topology/transport_mobility_9nodes.tp

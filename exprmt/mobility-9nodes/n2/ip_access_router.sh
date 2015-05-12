@@ -4,19 +4,16 @@ export MF_CLICK_LOG_LEVEL=1
 MF_SRC=/root/mobilityfirst
 
 click_config=$MF_SRC/router/click/conf/MF_IPAccessMultiRouter.click
-router_GUID=1
-#topology_file=$MF_SRC/eval/topology/testcfg_1-gstar_3node.tp
-#topology_file=/root/conf/topology/testcfg_5-gstar_4node_groupguid.tp
-#topology_file=/root/chk-mngr-svn/eval/topology/testcfg_4-gstar_8node_multihome.tp
-
+router_GUID=2
 topology_file=/root/scripts/conf/topology/transport_mobility_9nodes.tp
-core_dev_interface=eth0.1002
-edge_dev_interface=eth0.1001
+
+core_dev_interface=eth0.2011
+edge_dev_interface=eth0.2010
 edge_dev_interface_ip=192.168.1.2
 
-gnrs_server_ip=10.10.19.20
+gnrs_server_ip=192.168.2.3
 gnrs_server_port=5001
-local_ip=10.10.19.20
+local_ip=192.168.2.2
 local_port=4001
 
 click_log=/var/log/mf/click.log

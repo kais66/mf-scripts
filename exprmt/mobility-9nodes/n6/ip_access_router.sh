@@ -3,21 +3,19 @@ export MF_CLICK_LOG_LEVEL=1
 #export MF_CLICK_LOG_LEVEL=4
 MF_SRC=/root/mobilityfirst
 
-click_config=$MF_SRC/router/click/conf/MF_IPAccessMultiRouter.click
-#click_config=$MF_SRC/router/click/conf/MF_StgAccessMultiRouter.click
+#click_config=$MF_SRC/router/click/conf/MF_IPAccessMultiRouter.click
+click_config=$MF_SRC/router/click/conf/MF_StgAccessMultiRouter.click
 
-router_GUID=3
-#topology_file=$MF_SRC/eval/topology/testcfg_1-gstar_3node.tp
-#topology_file=/root/conf/topology/testcfg_5-gstar_4node_groupguid.tp
+router_GUID=6
 topology_file=/root/scripts/conf/topology/transport_mobility_9nodes.tp
 
 core_dev_interface=eth0.2011
-edge_dev_interface=eth0.2012 # dummy interface, so that we can use the AccessMultiRouter.click even if no clients are attached
-edge_dev_interface_ip=192.168.4.3
+edge_dev_interface=wlan0
+edge_dev_interface_ip=192.168.3.1
 
 gnrs_server_ip=192.168.2.3
 gnrs_server_port=5001
-local_ip=192.168.2.3
+local_ip=192.168.2.6
 local_port=4001
 
 click_log=/var/log/mf/click.log

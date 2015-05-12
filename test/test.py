@@ -1,6 +1,6 @@
 class Topo(object):
   def __init__(self):
-    self.nodes = [[16,1], [15,1], [15,6], [14,7], [15,20], [14,10], [14,14], [14,11]]
+    self.nodes = [[16,1], [15,1], [15,15], [14,7], [15,20], [14,10], [14,14], [14,11]]
 
   def printGrid(self):
     grid = [['....' for i in xrange(20)] for i in xrange(20)]

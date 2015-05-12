@@ -17,7 +17,7 @@ POLICY = bestperformance
 BUFFER_SIZE = 200
 
 #Default GUID for the node
-DEFAULT_GUID = 7 
+DEFAULT_GUID = 9 
 
 #Scan period to check interfaces status
 IF_SCAN_PERIOD = 1

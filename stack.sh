@@ -1,7 +1,7 @@
 #!/bin/bash
 
 log_lev=d
-settings_path=/root/conf/stack/receiver_settings
+settings_path=/root/conf/stack/sender_settings
 stack_log=/var/log/mf/stack.log
 
 killall mfstack

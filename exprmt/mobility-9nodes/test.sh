@@ -18,3 +18,7 @@ for (( i=2; i<=3; i++)) do
 done
 
 echo "ssh root@node${nodes[1]}"
+
+script_path="/root/scripts/"
+exprmt_path="${script_path}exprmt/mobility-9nodes/"
+cat ${script_path}conf/stack/sender_settings

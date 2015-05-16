@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# before the first time this script is run, the interface-up script has to be executed.
 latency=$1
 loss=$2
 run=$3
@@ -18,25 +19,36 @@ for (( i=2; i<=7; i++)) do
   ssh root@node${nodes[$i]} "killall -9 click"
 done
 
+
 for i in "${nodes[@]}"; do
   echo $i
 done
 
+script_path="/root/scripts/"
+exprmt_path="${script_path}exprmt/mobility-9nodes/"
 # start click router. Make sure node20-19 is logging Timeouts and losses. Need to disable tail -f...
-ssh root@node19-20 "nohup /root/scripts/n2/ip_access_router.sh &"
-ssh root@node20-19 "nohup /root/scripts/n3/ip_access_router.sh &"
+for (( i=2; i<=7; i++)) do
+  ssh root@node${nodes[$i]} "nohup ${exprmt_path}n${i}/ip_access_router.sh &"
+done
+#ssh root@node19-20 "nohup /root/scripts/n2/ip_access_router.sh &"
+
+# before starting the stacks, need to generate setting files to run the experiment with network-proactive mode or
+# receiver-driven mode
+exp_type="network_proactive" # or "receiver_driven"
+ssh root@node${nodes[1]} "${exprmt_path}stack_settings.sh sender $exp_type" 
+ssh root@node${nodes[9]} "${exprmt_path}stack_settings.sh receiver $exp_type" 
 
 # start stacks
 stack_log=/var/log/mf/stack.log
-ssh root@node19-19 "nohup /root/mobilityfirst/mfclient/hoststack/src/mfstack -f -t /root/conf/stack/sender_settings >$stack_log 2>&1 &"
-ssh root@node20-20 "nohup /root/mobilityfirst/mfclient/hoststack/src/mfstack -f -t /root/conf/stack/receiver_settings >$stack_log 2>&1 &"
+ssh root@node${nodes[1]} "nohup /root/mobilityfirst/mfclient/hoststack/src/mfstack -f -t ${script_path}conf/stack/sender_settings >$stack_log 2>&1 &"
+ssh root@node${nodes[9]} "nohup /root/mobilityfirst/mfclient/hoststack/src/mfstack -f -t ${script_path}conf/stack/receiver_settings >$stack_log 2>&1 &"
 
-sleep 2
+sleep 3
 
 # start proxy
 proxy_log=/var/log/mf/proxy.log
-ssh root@node19-19 "nohup /root/mobilityfirst/mfapps/http-apps/mfproxy/mfproxy -m -P 80 -t 20 >$proxy_log 2>&1 &"
-ssh root@node20-20 "nohup /root/mobilityfirst/mfapps/http-apps/mfproxy/mfproxy -p -P 80 -t 20 -s 6 >$proxy_log 2>&1 &"
+ssh root@node${nodes[1]} "nohup /root/mobilityfirst/mfapps/http-apps/mfproxy/mfproxy -m -P 80 -t 20 >$proxy_log 2>&1 &"
+ssh root@node${nodes[9]} "nohup /root/mobilityfirst/mfapps/http-apps/mfproxy/mfproxy -p -P 80 -t 20 -s 1 >$proxy_log 2>&1 &"
 
 # allow the proxy and router to establish states
 sleep 3

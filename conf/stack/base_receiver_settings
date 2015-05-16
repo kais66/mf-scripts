@@ -1,28 +1,25 @@
 #Interface definition for interface connected to mfrouter
 #Tuple <type, name, auto>
-INTERFACE = ether,eth0.2010,auto
+#INTERFACE = wifi,wlan0,auto
+
+#INTERFACE = ether, eth0, auto
 #Interface definition for interface not connected to mfrouter
 #Tuple <type, name, manual, ip_addr, mac_addr>
 #INTERFACE = wimax,wmx1,manual, 192.168.1.1, 11:22:33:44:55:66
-#INTERFACE = ether, eth1, manual, 10.18.1.2, 00:03:1d:09:56:92
+INTERFACE = wifi, wlan0, auto
 
 #Policies available: bestperformance, wifionly, wimaxonly, etheronly, weighted11, weighted31
 #POLICY = bestperformance
-POLICY = etheronly
-#POLICY = etheronly
+#POLICY = wifionly
+POLICY = bestperformance
 
 #Buffer size for sockets and interfaces
 BUFFER_SIZE = 200
 
 #Default GUID for the node
-DEFAULT_GUID = 1
+DEFAULT_GUID = 9 
 
 #Scan period to check interfaces status
-IF_SCAN_PERIOD = 5
+IF_SCAN_PERIOD = 1
 
 CSYN_TO=200000
-
-TRANS_RELIABLE=true
-TRANS_CHK_COUNT_NACK_THRESH=3
-TRANS_SEND_NACK_TIMEOUT=1000000
-TRANS_RECV_NACK_TIMEOUT=1000000

@@ -25,10 +25,10 @@ elif [ "$node_id" -eq 2 ]; then
 	ifup $link2_if
 elif [ $node_id -eq 3 -o $node_id -eq 4 ]; then
 	ifup $link2_if
-elif [ $node_id -ge 5 -a $node_id -le 8 ]; then
+elif [ $node_id -ge 5 -a $node_id -le 7 ]; then
   ifup $link2_if
   # wifi
-  AP_CONF_PATH="/root/scripts/ap/trans_ap$(($node_id-2)).conf"
+  AP_CONF_PATH="/root/scripts/ap/trans_ap$(($node_id-4)).conf"
   killall hostapd
   ifconfig $wlan_if down
   sleep 3

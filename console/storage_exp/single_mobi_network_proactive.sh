@@ -2,8 +2,8 @@
 
 # before the first time this script is run, the interface-up script has to be executed.
 latency=$1
-loss=$2
-run=$3
+#loss=$2
+#run=$3
 disconn_intv=$4
 
 # server: 1:node14-10; first hop router: 2:node14-11; 
@@ -20,17 +20,12 @@ for (( i=2; i<=7; i++)) do
 done
 
 
-for i in "${nodes[@]}"; do
-  echo $i
-done
-
 script_path="/root/scripts/"
 exprmt_path="${script_path}exprmt/mobility-9nodes/"
 # start click router. Make sure node20-19 is logging Timeouts and losses. Need to disable tail -f...
 for (( i=2; i<=7; i++)) do
   ssh root@node${nodes[$i]} "nohup ${exprmt_path}n${i}/ip_access_router.sh &"
 done
-#ssh root@node19-20 "nohup /root/scripts/n2/ip_access_router.sh &"
 
 # before starting the stacks, need to generate setting files to run the experiment with network-proactive mode or
 # receiver-driven mode
@@ -65,13 +60,10 @@ sleep $mobi_intv
 # associate the client with another AP. After certain amount of time (emulating mobility)
 ssh root@node${nodes[9]} "nohup iwconfig wlan0 essid mf_trans_ap_2 channel 6 commit &"
 
-#ssh root@node${nodes[5]} "nohup /root/scripts/n4/periodicDisconnect.sh $conn_intv $disconn_intv >/dev/null 2>&1 &"
 
-#ssh root@node20-20 "nohup /root/scripts/exprmt/content_req_disconnect.sh $conn_intv $disconn_intv >/dev/null 2>&1 &"
 
 # now experiment has finished, but disconn script might still be running. Kill them. 
-ssh root@10.10.20.19 "killall -9 periodicDisconnect.sh"
-ssh root@10.10.20.20 "killall -9 periodicDisconnect.sh"
+ssh root@node${nodes[5]} "killall -9 periodicDisconnect.sh"
 
 # retrieve log files
 #scp root@node20-20:/var/log/mf/http.log /home/kais/transport/results/1222/mf/stg-mf-${run}-${disconn_intv}.log

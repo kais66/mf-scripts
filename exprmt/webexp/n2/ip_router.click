@@ -44,8 +44,8 @@ ping_ipc[1] -> Discard;
 // Forwarding path for eth0.1001
 rt[1] -> DropBroadcasts
     -> cp0 :: PaintTee(1)
-    -> gio0 :: IPGWOptions(192.168.1.2)
-    -> FixIPSrc(192.168.1.2)
+    -> gio0 :: IPGWOptions(192.168.2.1)
+    -> FixIPSrc(192.168.2.1)
     -> dt0 :: DecIPTTL
     -> fr0 :: IPFragmenter(1500)
     -> [0]arpq0;
@@ -57,8 +57,8 @@ cp0[1] -> ICMPError(192.168.1.2, redirect, host) -> rt;
 // Forwarding path for eth0.1002
 rt[2] -> DropBroadcasts
     -> cp1 :: PaintTee(2)
-    -> gio1 :: IPGWOptions(192.168.2.1)
-    -> FixIPSrc(192.168.2.1)
+    -> gio1 :: IPGWOptions(192.168.1.2)
+    -> FixIPSrc(192.168.1.2)
     -> dt1 :: DecIPTTL
     -> fr1 :: IPFragmenter(1500)
     -> [0]arpq1;

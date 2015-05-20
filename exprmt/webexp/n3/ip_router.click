@@ -14,12 +14,15 @@ ip :: Strip(14)
 // ARP responses are copied to each ARPQuerier and the host.
 arpt :: Tee(2);
 
+
+out0 :: Queue(65536) -> todevice0 :: ToDevice(wlan0);
+out1 :: Queue(65536) -> todevice1 :: ToDevice(eth0.1002);
+
 // Input and output paths for eth0.1002
 c0 :: Classifier(12/0806 20/0001, 12/0806 20/0002, 12/0800, -);
 FromDevice(eth0.1002, SNIFFER false) -> c0;
-out0 :: Queue(65536) -> todevice0 :: ToDevice(wlan0);
-c0[0] -> ar0 :: ARPResponder(192.168.1.1 00:0b:6b:d9:d0:d5) -> out0;
-arpq0 :: ARPQuerier(192.168.2.2, 00:03:1d:0c:cd:aa) -> out0;
+c0[0] -> ar0 :: ARPResponder(192.168.3.2 00:03:1d:0c:cd:aa) -> out1;
+arpq0 :: ARPQuerier(192.168.3.2, 00:0b:6b:d9:d0:d5) -> out0;
 c0[1] -> arpt;
 arpt[0] -> [1]arpq0;
 c0[2] -> Paint(1) -> ip;
@@ -28,9 +31,8 @@ c0[3] -> Print("eth0.1002 non-IP") -> Discard;
 // Input and output paths for wlan
 c1 :: Classifier(12/0806 20/0001, 12/0806 20/0002, 12/0800, -);
 FromDevice(wlan0, SNIFFER false) -> c1;
-out1 :: Queue(65536) -> todevice1 :: ToDevice(eth0.1002);
-c1[0] -> ar1 :: ARPResponder(192.168.3.2 00:03:1d:0c:cd:aa) -> out1;
-arpq1 :: ARPQuerier(192.168.3.1, 00:0b:6b:d9:d0:d5) -> out1;
+c1[0] -> ar1 :: ARPResponder(192.168.1.1 00:0b:6b:d9:d0:d5) -> out0;
+arpq1 :: ARPQuerier(192.168.2.2, 00:03:1d:0c:cd:aa) -> out1;
 c1[1] -> arpt;
 arpt[1] -> [1]arpq1;
 c1[2] -> Paint(2) -> ip;
@@ -44,11 +46,11 @@ ping_ipc[1] -> Discard;
 // Forwarding path for eth0.1002
 rt[1] -> DropBroadcasts
     -> cp0 :: PaintTee(1)
-    -> gio0 :: IPGWOptions(192.168.3.1)
-    -> FixIPSrc(192.168.3.1)
+    -> gio0 :: IPGWOptions(192.168.2.2)
+    -> FixIPSrc(192.168.2.2)
     -> dt0 :: DecIPTTL
     -> fr0 :: IPFragmenter(1500)
-    -> [0]arpq0;
+    -> [0]arpq1;
 dt0[1] -> ICMPError(192.168.2.2, timeexceeded) -> rt;
 fr0[1] -> ICMPError(192.168.2.2, unreachable, needfrag) -> rt;
 gio0[1] -> ICMPError(192.168.2.2, parameterproblem) -> rt;
@@ -61,7 +63,7 @@ rt[2] -> DropBroadcasts
     -> FixIPSrc(192.168.3.1)
     -> dt1 :: DecIPTTL
     -> fr1 :: IPFragmenter(1500)
-    -> [0]arpq1;
+    -> [0]arpq0;
 dt1[1] -> ICMPError(192.168.3.1, timeexceeded) -> rt;
 fr1[1] -> ICMPError(192.168.3.1, unreachable, needfrag) -> rt;
 gio1[1] -> ICMPError(192.168.3.1, parameterproblem) -> rt;

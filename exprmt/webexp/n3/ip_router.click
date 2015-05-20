@@ -30,7 +30,7 @@ c1 :: Classifier(12/0806 20/0001, 12/0806 20/0002, 12/0800, -);
 FromDevice(wlan0, SNIFFER false) -> c1;
 out1 :: Queue(65536) -> todevice1 :: ToDevice(eth0.1002);
 c1[0] -> ar1 :: ARPResponder(192.168.1.1 00:0b:6b:d9:d0:d5) -> out1;
-arpq1 :: ARPQuerier(192.168.1.2, 00:03:1d:0c:cd:aa) -> out1;
+arpq1 :: ARPQuerier(192.168.2.2, 00:03:1d:0c:cd:aa) -> out1;
 c1[1] -> arpt;
 arpt[1] -> [1]arpq1;
 c1[2] -> Paint(2) -> ip;

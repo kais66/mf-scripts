@@ -44,15 +44,15 @@ ping_ipc[1] -> Discard;
 // Forwarding path for eth0.1002
 rt[1] -> DropBroadcasts
     -> cp0 :: PaintTee(1)
-    -> gio0 :: IPGWOptions(192.168.1.2)
-    -> FixIPSrc(192.168.1.2)
+    -> gio0 :: IPGWOptions(192.168.2.2)
+    -> FixIPSrc(192.168.2.2)
     -> dt0 :: DecIPTTL
     -> fr0 :: IPFragmenter(1500)
     -> [0]arpq0;
-dt0[1] -> ICMPError(192.168.1.2, timeexceeded) -> rt;
-fr0[1] -> ICMPError(192.168.1.2, unreachable, needfrag) -> rt;
-gio0[1] -> ICMPError(192.168,1.2, parameterproblem) -> rt;
-cp0[1] -> ICMPError(192.168.1.2, redirect, host) -> rt;
+dt0[1] -> ICMPError(192.168.2.2, timeexceeded) -> rt;
+fr0[1] -> ICMPError(192.168.2.2, unreachable, needfrag) -> rt;
+gio0[1] -> ICMPError(192.168.2.2, parameterproblem) -> rt;
+cp0[1] -> ICMPError(192.168.2.2, redirect, host) -> rt;
 
 // Forwarding path for wlan
 rt[2] -> DropBroadcasts

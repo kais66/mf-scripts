@@ -51,18 +51,18 @@ rt[1] -> DropBroadcasts
     -> [0]arpq0;
 dt0[1] -> ICMPError(192.168.1.2, timeexceeded) -> rt;
 fr0[1] -> ICMPError(192.168.1.2, unreachable, needfrag) -> rt;
-gio0[1] -> ICMPError(192.168,1.2, parameterproblem) -> rt;
+gio0[1] -> ICMPError(192.168.1.2, parameterproblem) -> rt;
 cp0[1] -> ICMPError(192.168.1.2, redirect, host) -> rt;
 
 // Forwarding path for eth0.1002
 rt[2] -> DropBroadcasts
     -> cp1 :: PaintTee(2)
-    -> gio1 :: IPGWOptions(192.168.3.1)
-    -> FixIPSrc(192.168.3.1)
+    -> gio1 :: IPGWOptions(192.168.2.1)
+    -> FixIPSrc(192.168.2.1)
     -> dt1 :: DecIPTTL
     -> fr1 :: IPFragmenter(1500)
     -> [0]arpq1;
-dt1[1] -> ICMPError(192.168.3.1, timeexceeded) -> rt;
-fr1[1] -> ICMPError(192.168.3.1, unreachable, needfrag) -> rt;
-gio1[1] -> ICMPError(192.168.3.1, parameterproblem) -> rt;
-cp1[1] -> ICMPError(192.168.3.1, redirect, host) -> rt;
+dt1[1] -> ICMPError(192.168.2.1, timeexceeded) -> rt;
+fr1[1] -> ICMPError(192.168.2.1, unreachable, needfrag) -> rt;
+gio1[1] -> ICMPError(192.168.2.1, parameterproblem) -> rt;
+cp1[1] -> ICMPError(192.168.2.1, redirect, host) -> rt;

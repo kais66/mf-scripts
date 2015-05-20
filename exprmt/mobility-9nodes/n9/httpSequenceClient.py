@@ -85,9 +85,10 @@ if __name__ == "__main__":
     stime = 0.0
     if argc>1:
         random.seed()
-        stime = float(sys.argv[1])*random.random()
         if float(sys.argv[1]) < 0:
-          stime = 9.0 
+          stime = -float(sys.argv[1])
+        else:
+          stime = float(sys.argv[1])*random.random()
         time.sleep(stime)
 
     server = sys.argv[2] + ':80'

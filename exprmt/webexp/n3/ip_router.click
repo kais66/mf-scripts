@@ -52,7 +52,7 @@ rt[1] -> DropBroadcasts
 dt0[1] -> ICMPError(192.168.2.2, timeexceeded) -> rt;
 fr0[1] -> ICMPError(192.168.2.2, unreachable, needfrag) -> rt;
 gio0[1] -> ICMPError(192.168.2.2, parameterproblem) -> rt;
-cp0[1] -> ICMPError(192.168.2.2, redirect, host) -> rt;
+cp0[1] -> ICMPError(192.168.2.2, redirect, host) -> Print("ICMP redirect") -> rt;
 
 // Forwarding path for wlan
 rt[2] -> DropBroadcasts
@@ -65,4 +65,4 @@ rt[2] -> DropBroadcasts
 dt1[1] -> ICMPError(192.168.3.1, timeexceeded) -> rt;
 fr1[1] -> ICMPError(192.168.3.1, unreachable, needfrag) -> rt;
 gio1[1] -> ICMPError(192.168.3.1, parameterproblem) -> rt;
-cp1[1] -> ICMPError(192.168.3.1, redirect, host) -> rt;
+cp1[1] -> ICMPError(192.168.3.1, redirect, host) -> Print("ICMP redirect") -> rt;

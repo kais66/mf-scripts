@@ -19,7 +19,7 @@ wlan_if=wlan0
 
 if [ "$1" -eq 1 ]; then
 	ifup $link1_if
-	route add -net 192.168.0.0 netmask 255.255.0.0 gw 192.168.1.2
+	route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.1.2
   ethtool -K $link1_if tso off gso off gro off lro off
   ethtool -K eth0 tso off gso off gro off lro off
 elif [ "$1" -eq 2 ]; then
@@ -34,12 +34,16 @@ elif [ "$1" -eq 3 ]; then
   ethtool -K eth0 tso off gso off gro off lro off
   # wifi
   AP_CONF_PATH="/root/scripts/ap/trans_ap1.conf"
+  echo "Killing hostapd"
   killall hostapd
   ifconfig $wlan_if down
   sleep 3
   modprobe ath5k
   sleep 3
-  hostapd $AP_CONF_PATH &
+  ifconfig $wlan_if up
+  echo "Starting hostapd"
+  hostapd -B $AP_CONF_PATH
+  echo "Finishing configuration" 
   ifconfig $wlan_if 192.168.3.1 up
   iwconfig $wlan_if rate 54M
 
@@ -52,7 +56,7 @@ elif [ "$1" -eq 4 ]; then
   iwconfig $wlan_if essid mf_trans_ap_1
   iwconfig $wlan_if channel 11
   ifconfig $wlan_if 192.168.3.2 up
-  route add -net 192.168.0.0 netmask 255.255.0.0 gw 192.168.3.1
+  route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.3.1
 
 elif [ "$1" -eq 5 ]; then
   # wifi

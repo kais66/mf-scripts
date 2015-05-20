@@ -19,7 +19,7 @@ c0 :: Classifier(12/0806 20/0001, 12/0806 20/0002, 12/0800, -);
 FromDevice(eth0.1001, SNIFFER false) -> c0;
 out0 :: Queue(65536) -> todevice0 :: ToDevice(eth0.1002);
 c0[0] -> ar0 :: ARPResponder(192.168.3.2 00:03:1d:0c:cd:b0) -> out0;
-arpq0 :: ARPQuerier(192.168.3.2 00:03:1d:0c:cd:b0) -> out0;
+arpq0 :: ARPQuerier(192.168.3.2, 00:03:1d:0c:cd:b0) -> out0;
 c0[1] -> arpt;
 arpt[0] -> [1]arpq0;
 c0[2] -> Paint(1) -> ip;

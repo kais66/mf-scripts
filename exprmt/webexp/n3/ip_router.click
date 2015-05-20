@@ -22,7 +22,7 @@ out1 :: Queue(65536) -> todevice1 :: ToDevice(eth0.1002);
 c0 :: Classifier(12/0806 20/0001, 12/0806 20/0002, 12/0800, -);
 FromDevice(eth0.1002, SNIFFER false) -> c0;
 c0[0] -> ar0 :: ARPResponder(192.168.3.2 00:03:1d:0c:cd:aa) -> out1;
-arpq0 :: ARPQuerier(192.168.3.2, 00:0b:6b:d9:d0:d5) -> out0;
+arpq0 :: ARPQuerier(192.168.3.1, 00:0b:6b:d9:d0:d5) -> out0;
 c0[1] -> arpt;
 arpt[0] -> [1]arpq0;
 c0[2] -> Paint(1) -> ip;

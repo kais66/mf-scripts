@@ -39,8 +39,8 @@ elif [ "$1" -eq 3 ]; then
   sleep 3
   modprobe ath5k
   sleep 3
-  ifconfig $wlan_if -B up
-  hostapd $AP_CONF_PATH &
+  ifconfig $wlan_if up
+  hostapd -B $AP_CONF_PATH 
   ifconfig $wlan_if 192.168.3.1 up
   iwconfig $wlan_if rate 54M
 

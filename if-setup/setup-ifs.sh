@@ -34,13 +34,16 @@ elif [ "$1" -eq 3 ]; then
   ethtool -K eth0 tso off gso off gro off lro off
   # wifi
   AP_CONF_PATH="/root/scripts/ap/trans_ap1.conf"
+  echo "Killing hostapd"
   killall hostapd
   ifconfig $wlan_if down
   sleep 3
   modprobe ath5k
   sleep 3
   ifconfig $wlan_if up
-  hostapd -B $AP_CONF_PATH 
+  echo "Starting hostapd"
+  hostapd -B $AP_CONF_PATH
+  echo "Finishing configuration" 
   ifconfig $wlan_if 192.168.3.1 up
   iwconfig $wlan_if rate 54M
 

@@ -15,4 +15,4 @@ killall mfproxy
 
 sleep 10
 /root/mobilityfirst/mfapps/http-apps/mfproxy/mfproxy -m -P 80 -t 20 >$proxy_log 2>&1 &
-tail -f $stack_log
+#tail -f $stack_log

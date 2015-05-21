@@ -4,7 +4,7 @@
 #/root/mobilityfirst/mfclient/hoststack/src/mfstack receiver_settings -d > /var/log/mf/stack.log 2> /var/log/mf/stack.log &
 
 
-log_lev=d
+log_lev=f
 settings_path=/root/scripts/conf/stack/sender_settings
 stack_log=/var/log/mf/stack.log
 proxy_log=/var/log/mf/proxy.log

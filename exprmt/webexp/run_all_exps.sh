@@ -10,7 +10,7 @@ delay=0
 error=0
 
 #start ip
-#$expf/run_mf_loop.sh $delay $error
+$expf/run_mf_loop.sh $delay $error
 
 
 #Case (0,0.01)
@@ -18,21 +18,21 @@ delay=0
 error="0.01"
 
 #start ip
-#$expf/run_mf_loop.sh $delay $error
+$expf/run_mf_loop.sh $delay $error
 
 #Case (10,0)
 delay=10
 error=0
 
 #start ip
-#$expf/run_mf_loop.sh $delay $error
+$expf/run_mf_loop.sh $delay $error
 
 #Case (10,0.01)
 delay=10
 error="0.01"
 
 #start ip
-#$expf/run_mf_loop.sh $delay $error
+$expf/run_mf_loop.sh $delay $error
 
 
 #Case (50,0)
@@ -56,7 +56,7 @@ delay=100
 error="0"
 
 #start ip
-#$expf/run_mf_loop.sh $delay $error
+$expf/run_mf_loop.sh $delay $error
 
 
 #Case (100,0.01)
@@ -64,35 +64,35 @@ delay=100
 error="0.01"
 
 #start ip
-#$expf/run_mf_loop.sh $delay $error
+$expf/run_mf_loop.sh $delay $error
 
 #Case (0,0)
 delay=0
 error=0
 
 #start ip loop
-#$expf/run_ip_loop.sh $delay $error
+$expf/run_ip_loop.sh $delay $error
 
 #Case (0,0.01)
 delay=0
 error="0.01"
 
 #start ip loop
-#$expf/run_ip_loop.sh $delay $error
+$expf/run_ip_loop.sh $delay $error
 
 #Case (10,0)
 delay=10
 error=0
 
 #start ip loop
-#$expf/run_ip_loop.sh $delay $error
+$expf/run_ip_loop.sh $delay $error
 
 #Case (10,0.01)
 delay=10
 error="0.01"
 
 #start ip loop
-#$expf/run_ip_loop.sh $delay $error
+$expf/run_ip_loop.sh $delay $error
 
 #Case (50,0)
 delay=50
@@ -113,7 +113,7 @@ delay=100
 error="0"
 
 #start ip loop
-#$expf/run_ip_loop.sh $delay $error
+$expf/run_ip_loop.sh $delay $error
 
 
 #Case (100,0.01)
@@ -121,4 +121,4 @@ delay=100
 error="0.01"
 
 #start ip loop
-#$expf/run_ip_loop.sh $delay $error
+$expf/run_ip_loop.sh $delay $error

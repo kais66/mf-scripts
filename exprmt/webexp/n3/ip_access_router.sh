@@ -1,6 +1,6 @@
 #!/bin/bash
-export MF_CLICK_LOG_LEVEL=1
-#export MF_CLICK_LOG_LEVEL=4
+#export MF_CLICK_LOG_LEVEL=1
+export MF_CLICK_LOG_LEVEL=4
 MF_SRC=/root/mobilityfirst
 
 #click_config=$MF_SRC/router/click/conf/MF_IPAccessMultiRouter.click

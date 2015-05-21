@@ -12,5 +12,9 @@ proxy_log=/var/log/mf/proxy.log
 killall mfstack
 killall mfproxy
 /root/mobilityfirst/mfclient/hoststack/src/mfstack -$log_lev $settings_path >$stack_log 2>&1 &
+
+
+sleep 10
 /root/mobilityfirst/mfapps/http-apps/mfproxy/mfproxy -p -P 80 -t 20 -s 1 >$proxy_log 2>&1 &
+#/root/mobilityfirst/mfapps/http-apps/mfproxy/mfproxy -p -P 80 -t 2 -s 1 >$proxy_log 2>&1 &
 tail -f $stack_log

@@ -85,14 +85,15 @@ if __name__ == "__main__":
     stime = 0.0
     if argc>1:
         random.seed()
-        stime = float(sys.argv[1])*random.random()
         if float(sys.argv[1]) < 0:
-          stime = 9.0 
+          stime = -float(sys.argv[1])
+        else:
+          stime = float(sys.argv[1])*random.random()
         time.sleep(stime)
 
     server = sys.argv[2] + ':80'
-    client = HttpSequenceClient(server, localTO=0, socketTO=12, debug=True)
-    #client = HttpSequenceClient("localhost:80", localTO=0, debug=True)
+    #client = HttpSequenceClient(server, localTO=0, socketTO=12, debug=True)
+    client = HttpSequenceClient("localhost:80", localTO=0, debug=True)
     #files = ["/index.html", "/something.html"]
     files = ["/test1_subset/dummy_10M"]
 

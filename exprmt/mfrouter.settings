@@ -1,6 +1,7 @@
 # format: key = value (currently only 32-bit integer values are supported.)
 # sample conf parameters: CHK_STG_TIMEOUT_MSECOND
-CHK_STG_TIMEOUT_MSECOND = 2000
+#CHK_STG_TIMEOUT_MSECOND = 2000
+CHK_STG_TIMEOUT_MSECOND = 2000000
 
 # from mfassoctable.hh
 ASSOC_TIMEOUT_SEC = 3

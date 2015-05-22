@@ -18,7 +18,7 @@ nodes=("dummy" "14-10" "14-11" "15-20" "15-15" "16-1" "15-1" "14-14" "dummy" "14
 # kill everything first 
 ssh root@node${nodes[1]} "killall -9 mfstack; killall -9 mfproxy;"
 ssh root@node${nodes[9]} "killall -9 mfstack; killall -9 mfproxy; killall -9 python"
-for (( i=2; i<=7; i++)) do
+for (( i=2; i<=6; i++)) do
   ssh root@node${nodes[$i]} "killall -9 click"
 done
 

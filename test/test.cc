@@ -1,10 +1,10 @@
 #include <iostream>
 
+#include <arpa/inet.h>
 //#include "mf.hh"
 #include "mfguid.hh"
 #include "mftransportheader.hh"
 #include "mfroutingheader.hh"
-
 using namespace std;
 
 int main() {
@@ -37,4 +37,8 @@ int main() {
         setStoreDstGUID(u).
         setNumStoredChk(1);
   cout << "world" << endl;
+
+  uint32_t orig = 3892510720;  
+  cout << orig << endl;
+  cout << htonl(orig) << endl;
 }

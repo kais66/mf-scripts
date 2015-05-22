@@ -1,6 +1,6 @@
 #!/bin/bash
-export MF_CLICK_LOG_LEVEL=1
-#export MF_CLICK_LOG_LEVEL=4
+#export MF_CLICK_LOG_LEVEL=1
+export MF_CLICK_LOG_LEVEL=4
 MF_SRC=/root/mobilityfirst
 
 click_config=$MF_SRC/router/click/conf/MF_IPAccessMultiRouter.click
@@ -24,4 +24,4 @@ click_log=/var/log/mf/click.log
                      GNRS_server_ip=$gnrs_server_ip GNRS_server_port=$gnrs_server_port \
                      GNRS_listen_ip=$local_ip GNRS_listen_port=$local_port >$click_log 2>&1 &
 echo "/usr/local/bin/click -j 8 $click_config my_GUID=$router_GUID topo_file=$topology_file core_dev=$core_dev_interface edge_dev=$edge_dev_interface edge_dev_ip=$edge_dev_interface_ip GNRS_server_ip=$gnrs_server_ip GNRS_server_port=$gnrs_server_port GNRS_listen_ip=$local_ip GNRS_listen_port=$local_port"
-tail -f $click_log
+#tail -f $click_log

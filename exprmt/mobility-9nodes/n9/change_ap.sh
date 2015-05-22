@@ -1,14 +1,10 @@
 #!/bin/bash
 
+$mobi_intv=$1
 
-wlan_if=wlan0
-ap=mf_trans_ap_2
-chann=1
-ip=192.168.3.2
-ap_ip=192.168.3.1
-#iwconfig $wlan_if mode Managed essid $ap channel $chann commit
-iwconfig $wlan_if essid $ap channel $chann commit
-echo "iwconfig $wlan_if mode Managed essid $ap channel $chann"
+sleep $mobi_intv
+iwconfig wlan0 essid mf_trans_ap_2 channel 6
 
-#ifconfig $wlan_if $ip up
-#route add -net 192.168.0.0 netmask gw $ap_ip
+
+#iwconfig $wlan_if essid $ap channel $chann commit
+

@@ -26,7 +26,14 @@ done
 script_path="/root/scripts/"
 exprmt_path="${script_path}exprmt/mobility-9nodes/"
 
-ssh root@node${nodes[9]} "nohup iwconfig wlan0 essid mf_trans_ap_1 channel 11 &"
+ssh root@node${nodes[9]} "nohup tc qdisc del dev wlan0 root "
+ssh root@node${nodes[5]} "nohup tc qdisc del dev wlan0 root "
+ssh root@node${nodes[9]} "nohup iwconfig wlan0 essid mf_trans_ap_1 channel 11 "
+
+# before starting the stacks, need to generate setting files to run the experiment with network-proactive mode or
+# receiver-driven mode
+ssh root@node${nodes[9]} "cp /root/scripts/conf/stack/recv_${exp_type} /root/scripts/conf/stack/receiver_settings"
+ssh root@node${nodes[5]} "cp /root/scripts/exprmt/router_${exp_type} /root/scripts/exprmt/mfrouter.settings"
 
 # start click router.
 for (( i=2; i<=6; i++)) do
@@ -35,10 +42,6 @@ for (( i=2; i<=6; i++)) do
   fi
 done
 
-# before starting the stacks, need to generate setting files to run the experiment with network-proactive mode or
-# receiver-driven mode
-ssh root@node${nodes[9]} "cp /root/scripts/conf/stack/recv_${exp_type} /root/scripts/conf/stack/receiver_settings"
-ssh root@node${nodes[5]} "cp /root/scripts/exprmt/router_${exp_type} /root/scripts/exprmt/mfrouter.settings"
     
 
 #ssh root@node${nodes[1]} "${exprmt_path}stack_settings.sh sender $exp_type" 
@@ -48,6 +51,8 @@ ssh root@node${nodes[5]} "cp /root/scripts/exprmt/router_${exp_type} /root/scrip
 stack_log=/var/log/mf/stack.log
 ssh root@node${nodes[1]} "nohup /root/mobilityfirst/mfclient/hoststack/src/mfstack -f -t ${script_path}conf/stack/sender_settings >$stack_log 2>&1 &"
 ssh root@node${nodes[9]} "nohup /root/mobilityfirst/mfclient/hoststack/src/mfstack -f -t ${script_path}conf/stack/receiver_settings >$stack_log 2>&1 &"
+#ssh root@node${nodes[1]} "nohup /root/mobilityfirst/mfclient/hoststack/src/mfstack -d ${script_path}conf/stack/sender_settings >$stack_log 2>&1 &"
+#ssh root@node${nodes[9]} "nohup /root/mobilityfirst/mfclient/hoststack/src/mfstack -d ${script_path}conf/stack/receiver_settings >$stack_log 2>&1 &"
 
 sleep 3
 
@@ -64,9 +69,9 @@ mobi_intv=10
 
 server_ip=127.0.0.1
 # first AP should disconnect after. Node 5...7 are APs. 
-ssh root@node${nodes[5]} "nohup ${exprmt_path}n5/periodicDisconnect.sh $conn_intv 3600 >/dev/null 2>&1 &"
+ssh root@node${nodes[5]} "nohup ${exprmt_path}n5/periodicDisconnect.sh $conn_intv 10 >/dev/null 2>&1 &"
 ssh root@node${nodes[9]} "nohup ${exprmt_path}n9/periodicDisconnect.sh $conn_intv $mobi_intv >/dev/null 2>&1 &"
-ssh root@node${nodes[9]} "nohup ${exprmt_path}n9/change_ap.sh $mobi_intv 2>&1 &"
+#ssh root@node${nodes[9]} "nohup ${exprmt_path}n9/change_ap.sh 20 2>&1 &"
 
 ssh root@node${nodes[9]} "python ${exprmt_path}n9/httpSequenceClient.py $conn_intv $server_ip"
 

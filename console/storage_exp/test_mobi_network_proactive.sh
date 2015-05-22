@@ -28,13 +28,15 @@ mobi_intv=10
 server_ip=127.0.0.1
 # first AP should disconnect after. Node 5...7 are APs. 
 ssh root@node${nodes[5]} "nohup ${exprmt_path}n5/periodicDisconnect.sh $conn_intv 3600 >/dev/null 2>&1 &"
+ssh root@node${nodes[9]} "nohup ${exprmt_path}n9/periodicDisconnect.sh $conn_intv $mobi_intv >/dev/null 2>&1 &"
 
 #ssh root@node${nodes[9]} "python ${exprmt_path}n9/httpSequenceClient.py $conn_intv $server_ip"
 sleep $mobi_intv
+sleep 1
 
 # associate the client with another AP. After certain amount of time (emulating mobility)
-ssh root@node${nodes[9]} "nohup iwconfig wlan0 essid mf_trans_ap_2 channel 6 commit &"
-sleep 2
+ssh root@node${nodes[9]} "nohup iwconfig wlan0 essid mf_trans_ap_2 channel 6 commit "
+sleep 2000
 
 
 

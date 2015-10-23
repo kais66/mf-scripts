@@ -1,9 +1,9 @@
 #!/bin/bash
 
-latency=$1
-loss=$2
-run=$3
-disconn_intv=$4
+#latency=$1
+#loss=$2
+#run=$3
+#disconn_intv=$4
 
 # kill everything first 
 ssh root@node19-19 "killall -9 mfstack; killall -9 mfproxy;"
